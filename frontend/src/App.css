@@ -1,0 +1,282 @@
+/* Transition for theme switching */
+:root {
+  --transition-speed: 0.4s;
+}
+
+/* Auth Layouts */
+.auth-wrapper {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 1000px;
+  min-height: 600px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+/* Theme Variables */
+.light-theme {
+  --bg-color: #f0f2f5;
+  --text-color: #2c3e50;
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --accent-color: #4666f7;
+  --secondary-text: #6c757d;
+  --input-bg: rgba(255, 255, 255, 0.6);
+}
+
+.dark-theme {
+  --bg-color: #0f172a;
+  --text-color: #f1f5f9;
+  --glass-bg: rgba(30, 41, 59, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  --accent-color: #6366f1;
+  --secondary-text: #94a3b8;
+  --input-bg: rgba(15, 23, 42, 0.6);
+}
+
+/* Global Reset & Body */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.app-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Background Blobs */
+.bg-blobs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  filter: blur(80px);
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: move 20s infinite alternate;
+}
+
+.blob-1 {
+  width: 500px;
+  height: 500px;
+  background: #4666f7;
+  top: -100px;
+  left: -100px;
+  animation-duration: 25s;
+}
+
+.blob-2 {
+  width: 400px;
+  height: 400px;
+  background: #a855f7;
+  bottom: -50px;
+  right: -50px;
+  animation-duration: 30s;
+}
+
+.blob-3 {
+  width: 300px;
+  height: 300px;
+  background: #ec4899;
+  top: 50%;
+  left: 50%;
+  animation-duration: 20s;
+}
+
+@keyframes move {
+  from { transform: translate(0, 0) rotate(0deg); }
+  to { transform: translate(100px, 100px) rotate(360deg); }
+}
+
+/* Glassmorphism Utilities */
+.glass-card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 24px !important;
+  box-shadow: var(--card-shadow) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  color: var(--text-color) !important;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+}
+
+.glass-navbar {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  padding: 1rem 0;
+}
+
+/* Styled Inputs */
+.styled-input, .styled-select {
+  background: var(--input-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  backdrop-filter: blur(5px);
+}
+
+.styled-input::placeholder {
+  color: var(--secondary-text);
+}
+
+/* Buttons */
+.auth-btn, .hero-btn {
+  background: var(--accent-color) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 12px 24px !important;
+  font-weight: 600;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.auth-btn:hover, .hero-btn:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+}
+
+.display-1 {
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: var(--text-color) !important;
+}
+
+.hero-text {
+  color: var(--secondary-text);
+}
+
+.text-accent {
+  color: var(--accent-color);
+}
+
+/* Section Grid */
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.section-card {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Dark/Light specific tweaks */
+.dark-theme .navbar-brand,
+.dark-theme .nav-link,
+.dark-theme .navbar-text {
+  color: #f1f5f9 !important;
+}
+
+.light-theme .navbar-brand,
+.light-theme .nav-link,
+.light-theme .navbar-text {
+  color: #1e293b !important;
+}
+
+/* Ensure common text utilities use theme variables */
+.text-muted, .text-secondary {
+    color: var(--secondary-text) !important;
+}
+
+.form-label {
+    color: var(--text-color) !important;
+    opacity: 0.9;
+}
+
+.auth-wrapper p, .auth-wrapper span {
+    color: var(--text-color) !important;
+}
+
+.auth-wrapper .text-muted {
+    color: var(--secondary-text) !important;
+}
+
+/* Modal Theme Fixes */
+.modal-content {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid var(--glass-border) !important;
+    color: var(--text-color) !important;
+}
+
+.modal-header, .modal-footer {
+    border: none !important;
+    color: var(--text-color) !important;
+}
+
+.modal-title {
+    font-weight: 700 !important;
+    color: var(--text-color) !important;
+}
+
+.glass-modal .btn-close {
+    filter: var(--theme-filter); /* Custom filter for close button visibility */
+}
+
+/* Add theme filter for close buttons */
+.light-theme {
+  --theme-filter: invert(0);
+}
+.dark-theme {
+  --theme-filter: invert(1);
+}
+
+
+.password-toggle-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--secondary-text);
+    font-size: 1.25rem;
+    z-index: 10;
+    transition: color 0.3s ease;
+}
+
+.password-toggle-icon:hover {
+    color: var(--accent-color);
+}
+
