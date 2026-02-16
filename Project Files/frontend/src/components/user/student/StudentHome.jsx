@@ -7,6 +7,8 @@ const StudentHome = () => {
     const [courses, setCourses] = useState([]);
     const [filter, setFilter] = useState('');
     const [viewingCourse, setViewingCourse] = useState(null);
+    const [showVideo, setShowVideo] = useState(false);
+    const [currentVideo, setCurrentVideo] = useState('');
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -19,6 +21,15 @@ const StudentHome = () => {
         };
         fetchCourses();
     }, []);
+
+    const handleWatch = (videoUrl) => {
+        // Construct the full URL for the video
+        // Assuming backend is at baseURL (http://localhost:8000/api) 
+        // We need http://localhost:8000/uploads/filename
+        const baseUrl = axios.defaults.baseURL.replace('/api', '');
+        setCurrentVideo(`${baseUrl}/uploads/${videoUrl}`);
+        setShowVideo(true);
+    };
 
     const filteredCourses = courses.filter(c => 
         c.C_title.toLowerCase().includes(filter.toLowerCase()) || 
@@ -43,7 +54,12 @@ const StudentHome = () => {
                                 <h4 className="fw-bold mb-3">{idx + 1}. {section.title}</h4>
                                 <p className="text-secondary small">{section.description}</p>
                              </div>
-                             <Button variant="link" className="text-accent p-0 mt-3 align-self-start fw-bold small">
+                             <Button 
+                                variant="link" 
+                                className="text-accent p-0 mt-3 align-self-start fw-bold small"
+                                onClick={() => handleWatch(section.videoUrl)}
+                                disabled={!section.videoUrl}
+                             >
                                  WATCH NOW
                              </Button>
                         </Card>
@@ -52,6 +68,27 @@ const StudentHome = () => {
                         <p className="text-muted italic">No sessions available for this course.</p>
                     )}
                 </div>
+
+                {/* Video Player Modal */}
+                <Modal show={showVideo} onHide={() => setShowVideo(false)} size="lg" centered className="glass-modal">
+                    <Modal.Header closeButton className="border-0 pb-0">
+                        <Modal.Title className="fw-bold">Course Video</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="p-4">
+                        <div className="ratio ratio-16x9 rounded-4 overflow-hidden shadow-lg bg-black">
+                            {currentVideo ? (
+                                <video controls autoPlay key={currentVideo}>
+                                    <source src={currentVideo} type="video/mp4" />
+                                    Your browser does not support the video tag.
+                                </video>
+                            ) : (
+                                <div className="d-flex align-items-center justify-content-center h-100 text-white">
+                                    No video available
+                                </div>
+                            )}
+                        </div>
+                    </Modal.Body>
+                </Modal>
             </Container>
         )
     }

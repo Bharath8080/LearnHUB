@@ -11,7 +11,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('uploads')); // Serve uploaded files
+const path = require('path');
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded files with prefix
 
 // Placeholder routes
 app.get('/', (req, res) => {
