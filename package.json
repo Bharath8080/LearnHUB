@@ -1,8 +1,0 @@
-{
-  "name": "learn-hub-root",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "cd frontend && npm install && npm run build && cd .. && rm -rf dist && cp -r frontend/dist dist",
-    "start": "node backend/index.js"
-  }
-}
