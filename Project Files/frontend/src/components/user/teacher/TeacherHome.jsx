@@ -33,7 +33,7 @@ const TeacherHome = () => {
     const fetchCourses = async () => {
         try {
             const { data } = await axios.get('/courses');
-            const myCourses = data.filter(c => c.userId === userInfo._id);
+            const myCourses = data.filter(c => c.userId === userInfo?._id);
             setCourses(myCourses);
             if(viewingCourse) {
                 const updated = myCourses.find(c => c._id === viewingCourse._id);
@@ -43,12 +43,57 @@ const TeacherHome = () => {
             console.error(error);
         }
     };
-    // ... skipping fetchCourses useEffect for brevity ...
+
     useEffect(() => {
-        fetchCourses();
+        if (userInfo) {
+            fetchCourses();
+        }
     }, []);
 
-    // ... skipping other handlers ...
+    const handleCreateCourse = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post('/courses', {
+                C_title: cTitle, C_description: cDesc, C_categories: cCats, C_price: cPrice
+            });
+            setShowAddCourse(false);
+            fetchCourses();
+            setCTitle(''); setCDesc(''); setCCats(''); setCPrice('');
+        } catch (error) {
+            alert(error.response?.data?.message || 'Error creating course');
+        }
+    };
+
+    const handleDelete = async (id) => {
+        if(window.confirm('Are you sure?')) {
+            try {
+                await axios.delete(`/courses/${id}`);
+                setViewingCourse(null);
+                fetchCourses();
+            } catch (error) {
+                alert('Error deleting course');
+            }
+        }
+    };
+
+    const handleAddSection = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('title', sTitle);
+        formData.append('description', sDesc);
+        formData.append('video', sVideo);
+
+        try {
+            await axios.post(`/courses/${viewingCourse._id}/sections`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+            setShowAddSection(false);
+            fetchCourses();
+            setSTitle(''); setSDesc(''); setSVideo(null);
+        } catch (error) {
+            alert(error.response?.data?.message || 'Error adding section');
+        }
+    };
 
     if (viewingCourse) {
         return (
