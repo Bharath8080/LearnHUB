@@ -1,56 +1,74 @@
-# LearnHub (MERN Stack)
+# 🎓 LearnHub Source Code
 
-A comprehensive Online Learning Platform connecting Teachers and Students.
+This directory contains the core source code for the **LearnHub** MERN stack application. It is divided into two main components: a Node.js/Express backend and a React/Vite frontend.
 
-## Prerequisites
+---
 
-- [Node.js](https://nodejs.org/en/download/) (v14 or higher)
-- [MongoDB](https://www.mongodb.com/try/download/community) (Running locally or using Atlas)
+## Getting Started
 
-## Project Structure
+To run the application locally, you need to start **both** the backend and the frontend servers.
 
-- **backend/**: Express.js server and API
-- **frontend/**: React.js (Vite) application
+### Method 1: Running from the Repository Root
 
-## Getting Started (Windows)
+If your terminal is at the root directory (`LearnHub/`), use these commands:
 
-You will need to run the **Backend** and **Frontend** in two separate terminals.
-
-### 1. Setup Backend
-
-Open a new Command Prompt or PowerShell terminal:
+#### Terminal 1: Backend
 
 ```powershell
-# Navigate to backend folder
-cd backend
-
-# Install dependencies
+cd "Project Files/backend"
 npm install
-
-# Start the server (Runs on Port 8000)
 npm start
 ```
 
-_Note: Create a `.env` file in the `backend` folder if you have custom specific MongoDB credentials. Default URI is configured in `config/db.js`._
-
-### 2. Setup Frontend
-
-Open a **second** Command Prompt or PowerShell terminal:
+#### Terminal 2: Frontend
 
 ```powershell
-# Navigate to frontend folder
-cd frontend
-
-# Install dependencies
+cd "Project Files/frontend"
 npm install
-
-# Start the React app (Runs on Port 5173)
 npm run dev
 ```
 
-### 3. Usage
+### Method 2: Running from this Directory
 
-- Open your browser and go to `http://localhost:5173`
-- Register a new account (Select 'Student' or 'Teacher')
-- **Teacher**: Create courses and add video sections.
-- **Student**: Browse courses and enroll.
+If your terminal is already inside `Project Files/`:
+
+#### Terminal 1: Backend
+
+```powershell
+cd backend
+npm start
+```
+
+#### Terminal 2: Frontend
+
+```powershell
+cd frontend
+npm run dev
+```
+
+---
+
+## 🛠 Configuration
+
+### Backend (`/backend/.env`)
+
+The backend is configured to use port **8000**.
+
+- Default DB: MongoDB (Atlas)
+- Uploads: Stored in `/uploads` and served via `/uploads` prefix.
+
+### Frontend (`/frontend/.env`)
+
+The frontend is configured to use port **5173**.
+
+- API URL: `http://localhost:8000/api`
+
+---
+
+## 🖥 Application Usage
+
+1.  **Access**: Navigate to **[http://localhost:5173](http://localhost:5173)**.
+2.  **Roles**:
+    - **Teacher**: Click "Register" -> Choose "Teacher". Create courses and add video sessions.
+    - **Student**: Click "Register" -> Choose "Student". Browse and enroll in courses.
+3.  **Video Playback**: In the Student Home or Teacher Dashboard, click **WATCH NOW** to view session videos in the glassy popup player.
