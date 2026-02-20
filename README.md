@@ -72,14 +72,7 @@ For more detailed setup instructions, including configuration and feature detail
     <td align="center"><img src="Project Files/frontend/src/assets/Screenshot 2026-02-17 205042.png" width="400" alt="Screenshot 8"/></td>
   </tr>
   <tr>
-    <td align="center"><img src="Project Files/frontend/src/assets/Screenshot 2026-02-17 205055.png" width="400" alt="Screenshot 9"/></td>
     <td align="center"><img src="Project Files/frontend/src/assets/Screenshot 2026-02-17 205148.png" width="400" alt="Screenshot 10"/></td>
-  </tr>
-  <tr>
     <td align="center"><img src="Project Files/frontend/src/assets/Screenshot 2026-02-17 205254.png" width="400" alt="Screenshot 11"/></td>
-    <td align="center"><img src="Project Files/frontend/src/assets/login.jpg" width="400" alt="Login Page"/></td>
-  </tr>
-  <tr>
-    <td align="center" colspan="2"><img src="Project Files/frontend/src/assets/main.jpg" width="400" alt="Main Page"/></td>
   </tr>
 </table>
